@@ -80,7 +80,9 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				"Extensions/DeviceActivityReportContext+.swift",
+				"Extensions/DeviceActivityResults+.swift",
 				Models/AppReport.swift,
+				ReportsView/BarChartView.swift,
 				ReportsView/PieChartView.swift,
 			);
 			target = 00E2B6DC2EB9EFA8009B6DA1 /* ScreenTimeAPI */;
