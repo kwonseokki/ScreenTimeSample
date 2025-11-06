@@ -12,28 +12,30 @@ import ManagedSettings
 
 struct ContentView: View {
     let center = AuthorizationCenter.shared
-    
-    @State private var context: DeviceActivityReport.Context = .barGraph
+
+    @State private var context: DeviceActivityReport.Context = .totalActivity
     @State private var filter = DeviceActivityFilter(
-        segment: .hourly(
-            during: DateInterval(
-                start: Date(timeIntervalSinceNow: -60 * 60 * 24),
-                end: .now
-            )
-        ),
+        segment: .daily(
+               during: Calendar.current.dateInterval(
+                  of: .weekOfYear, for: .now
+               )!
+           ),
         users: .all,
-        devices: .all
+        devices: .init([.iPhone])
     )
     
     var body: some View {
         VStack {
+            Text("앱 사용량")
             DeviceActivityReport(context, filter: filter)
-                .frame(width: 300, height: 300)
+                .frame(width: 400, height: 400)
         }
         .task {
             do {
                 // 개인이 사용시 individual로 설정
-                try await AuthorizationCenter.shared.requestAuthorization(for: .individual)
+                try await AuthorizationCenter.shared.requestAuthorization(for: .individual)        
+                let status = AuthorizationCenter.shared.authorizationStatus
+                        print("Authorization Status: \(status)")
             } catch {
                 print("error: \(error)")
             }

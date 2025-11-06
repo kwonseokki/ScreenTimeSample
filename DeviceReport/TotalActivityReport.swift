@@ -1,8 +1,8 @@
 //
 //  TotalActivityReport.swift
-//  DeviceActivityTest
+//  DeviceReport
 //
-//  Created by a on 11/4/25.
+//  Created by a on 11/6/25.
 //
 
 import DeviceActivity
@@ -14,19 +14,6 @@ extension DeviceActivityReport.Context {
     // your extension's corresponding DeviceActivityReportScene to render the contents of the
     // report.
     static let totalActivity = Self("Total Activity")
-    static let barGraph = Self("barGraph")
-    static let pieChart = Self("pieChart")
-}
-
-// DeviceActivityReportScene 프로토콜은 장면을 정의하는 역할
-struct PieCharReport: DeviceActivityReportScene {
-    let context: DeviceActivityReport.Context = .pieChart
-    
-    let content: ([AppReport]) -> PieCharView
-    
-    func makeConfiguration(representing data: DeviceActivityResults<DeviceActivityData>) async -> [AppReport] {
-        return [.init(appName: "test", usageTime: "1h")]
-    }
 }
 
 struct TotalActivityReport: DeviceActivityReportScene {

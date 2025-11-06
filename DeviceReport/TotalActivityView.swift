@@ -1,8 +1,8 @@
 //
 //  TotalActivityView.swift
-//  DeviceActivityTest
+//  DeviceReport
 //
-//  Created by a on 11/4/25.
+//  Created by a on 11/6/25.
 //
 
 import SwiftUI
@@ -11,7 +11,7 @@ struct TotalActivityView: View {
     let totalActivity: String
     
     var body: some View {
-        Text(totalActivity)
+        Text(totalActivity)        
     }
 }
 
