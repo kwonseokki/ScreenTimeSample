@@ -79,6 +79,8 @@
 		00E6AAA12EBBDE2900F4A723 /* Exceptions for "DeviceReport" folder in "ScreenTimeAPI" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				AppReport.swift,
+				PieChartView.swift,
 				TotalActivityReport.swift,
 				TotalActivityView.swift,
 			);

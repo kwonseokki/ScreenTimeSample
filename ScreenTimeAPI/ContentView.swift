@@ -12,23 +12,27 @@ import ManagedSettings
 
 struct ContentView: View {
     let center = AuthorizationCenter.shared
-
-    @State private var context: DeviceActivityReport.Context = .totalActivity
+    
+    @State private var reportType: [DeviceActivityReport.Context] = [.pieChart, .totalActivity]
+    @State private var context: DeviceActivityReport.Context = .pieChart
+    
     @State private var filter = DeviceActivityFilter(
         segment: .daily(
-               during: Calendar.current.dateInterval(
-                  of: .weekOfYear, for: .now
-               )!
-           ),
+            during: DateInterval(start: Calendar.current.startOfDay(for: Date()), end: .now)
+        ),
         users: .all,
         devices: .init([.iPhone])
     )
     
     var body: some View {
         VStack {
-            Text("앱 사용량")
-            DeviceActivityReport(context, filter: filter)
-                .frame(width: 400, height: 400)
+            Picker("Graph Context", selection: $context) {
+                ForEach(reportType, id: \.self) {
+                    Text("\($0.rawValue)")
+                }
+            }
+            .pickerStyle(.segmented)
+            DeviceActivityReport(context, filter: filter)                
         }
         .task {
             do {

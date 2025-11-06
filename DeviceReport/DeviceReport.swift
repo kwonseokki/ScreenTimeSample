@@ -16,6 +16,9 @@ struct DeviceReport: DeviceActivityReportExtension {
         TotalActivityReport { totalActivity in
             TotalActivityView(totalActivity: totalActivity)                
         }
+        PieChartReport { appReports in
+            PieChartView(appReports: appReports)
+        }
         // Add more reports here...
     }
 }
