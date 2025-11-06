@@ -35,7 +35,7 @@ extension DeviceActivityResults where Element ==  DeviceActivityData {
     func makeReport() async -> [AppReport] {
         var appReports: [AppReport] = await []
         
-        for await value in self {
+        for await value in self {            
             for await activity in value.activitySegments {
                 for await categorie in activity.categories {
                     for await application in categorie.applications {

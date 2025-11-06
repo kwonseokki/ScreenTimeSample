@@ -10,7 +10,14 @@ import SwiftUI
 import DeviceActivity
 import ManagedSettings
 
-struct ContentView: View {
+extension DeviceActivityFilter.SegmentInterval {
+    // 일일 데이터를 지정된 시간내의 기준으로 나눠서 보여준다
+    static let today: Self = .daily(during: DateInterval(start: Calendar.current.startOfDay(for: Date()), end: .now))
+    // 이번주 데이터를 지정된 시간 기준으로 나눠서 보여준다
+    static let thisWeek: Self = .weekly(during: Calendar.current.dateInterval(of: .weekOfYear, for: .now)!)
+}
+
+struct ChartView: View {
     let center = AuthorizationCenter.shared
     
     typealias ReportType = DeviceActivityReport.Context
@@ -19,9 +26,7 @@ struct ContentView: View {
     @State private var context: ReportType = .pieChart
     
     @State private var filter = DeviceActivityFilter(
-        segment: .daily(
-            during: DateInterval(start: Calendar.current.startOfDay(for: Date()), end: .now)
-        ),
+        segment: .thisWeek,
         users: .all,
         devices: .init([.iPhone])
     )

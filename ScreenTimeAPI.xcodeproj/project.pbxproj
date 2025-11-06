@@ -81,6 +81,7 @@
 			membershipExceptions = (
 				"Extensions/DeviceActivityReportContext+.swift",
 				"Extensions/DeviceActivityResults+.swift",
+				"Extensions/TimeInterval+.swift",
 				Models/AppReport.swift,
 				ReportsView/BarChartView.swift,
 				ReportsView/PieChartView.swift,

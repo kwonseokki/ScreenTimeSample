@@ -58,12 +58,12 @@ struct PieChartView: View {
                 VStack {
                     if let selectedItem {
                         Text("\(selectedItem.appName)")
-                        Text("\(selectedItem.usage)")
+                        Text(selectedItem.usage.toHHMM())
                             .font(.title)
                             .fontWeight(.bold)
                     } else if let selectedData {
                         Text("\(selectedData.appName)")
-                        Text("\(selectedData.usage)")
+                        Text(selectedData.usage.toHHMM())
                             .font(.title)
                             .fontWeight(.bold)
                     } else {
