@@ -13,8 +13,10 @@ import ManagedSettings
 struct ContentView: View {
     let center = AuthorizationCenter.shared
     
-    @State private var reportType: [DeviceActivityReport.Context] = [.pieChart, .barChart]
-    @State private var context: DeviceActivityReport.Context = .pieChart
+    typealias ReportType = DeviceActivityReport.Context
+    
+    @State private var reportType: [ReportType] = [.pieChart, .barChart]
+    @State private var context: ReportType = .pieChart
     
     @State private var filter = DeviceActivityFilter(
         segment: .daily(
@@ -32,14 +34,21 @@ struct ContentView: View {
                 }
             }
             .pickerStyle(.segmented)
-            DeviceActivityReport(context, filter: filter)            
+            
+            TabView(selection: $context) {
+                DeviceActivityReport(.pieChart, filter: filter)
+                    .tag(ReportType.pieChart)
+                
+                DeviceActivityReport(.barChart, filter: filter)
+                    .tag(ReportType.barChart)
+            }
         }
         .task {
             do {
                 // 개인이 사용시 individual로 설정
-                try await AuthorizationCenter.shared.requestAuthorization(for: .individual)        
+                try await AuthorizationCenter.shared.requestAuthorization(for: .individual)
                 let status = AuthorizationCenter.shared.authorizationStatus
-                        print("Authorization Status: \(status)")
+                print("Authorization Status: \(status)")
             } catch {
                 print("error: \(error)")
             }
