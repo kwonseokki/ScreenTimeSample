@@ -13,7 +13,7 @@ import ManagedSettings
 struct ContentView: View {
     let center = AuthorizationCenter.shared
     
-    @State private var reportType: [DeviceActivityReport.Context] = [.pieChart, .totalActivity]
+    @State private var reportType: [DeviceActivityReport.Context] = [.pieChart, .barChart]
     @State private var context: DeviceActivityReport.Context = .pieChart
     
     @State private var filter = DeviceActivityFilter(
@@ -32,7 +32,7 @@ struct ContentView: View {
                 }
             }
             .pickerStyle(.segmented)
-            DeviceActivityReport(context, filter: filter)                
+            DeviceActivityReport(context, filter: filter)            
         }
         .task {
             do {

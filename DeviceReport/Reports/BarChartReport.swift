@@ -15,8 +15,7 @@ struct BarChartReport: DeviceActivityReportScene {
     
     let content: ([AppReport]) -> BarChartView
     
-    func makeConfiguration(representing data: DeviceActivityResults<DeviceActivityData>) async -> [AppReport] {
-        
-        return[]
+    func makeConfiguration(representing data: DeviceActivityResults<DeviceActivityData>) async -> [AppReport] {        
+        return await data.makeReport()
     }
 }
